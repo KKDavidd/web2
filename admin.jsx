@@ -17,64 +17,96 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-/* ─── Global styles injected once ─── */
+/* ─── Global styles injected once ───
+   Ugyanaz a design-rendszer, mint a főoldalon (style.css):
+   Fraunces / Inter / JetBrains Mono, azonos színpaletta és radius. */
 const globalCSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Montserrat', sans-serif; background: #3a2e27; color: #f5f0e6; }
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-  /* login page background pattern */
+  :root {
+    --bg-dark: #2a211c;
+    --bg-medium: #4a3b32;
+    --bg-light: #8e7865;
+    --accent: #d4c3a3;
+    --text-light: #f5f0e6;
+    --text-dark: #1a1411;
+    --shadow: 0 10px 30px rgba(0,0,0,0.2);
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --line: rgba(212, 195, 163, 0.16);
+    --radius: 4px;
+
+    font-family: var(--font-body);
+    color: var(--text-light);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg-medium); }
+
+  ::-webkit-scrollbar { width: 12px; }
+  ::-webkit-scrollbar-track { background: var(--bg-dark); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 6px;
+    border: 3px solid var(--bg-dark);
+  }
+
+  /* ── login page ── */
   .login-bg {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 24px;
     background:
-      radial-gradient(ellipse at 20% 50%, rgba(212,195,163,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(212,195,163,0.05) 0%, transparent 50%),
-      #3a2e27;
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(212,195,163,0.045) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(212,195,163,0.045) 40px),
+      linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
   }
 
   .login-card {
-    background: linear-gradient(145deg, #2a211c, #322820);
-    border: 1px solid rgba(212,195,163,0.2);
-    border-radius: 20px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--line);
+    border-radius: 10px;
     padding: 52px 44px 44px;
     width: 100%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,195,163,0.05);
+    box-shadow: var(--shadow);
   }
 
   .login-monogram {
-    width: 64px; height: 64px;
+    width: 60px; height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #d4c3a3, #a89070);
+    background: var(--accent);
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 22px; font-weight: 700; color: #1a1411;
-    letter-spacing: 1px;
+    margin: 0 auto 22px;
+    font-family: var(--font-mono);
+    font-size: 20px; font-weight: 600; color: var(--text-dark);
+    letter-spacing: 0.5px;
   }
 
   .login-title {
-    color: #d4c3a3;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin-bottom: 4px;
+    font-family: var(--font-display);
+    color: var(--text-light);
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 6px;
   }
 
   .login-sub {
-    color: #8e7865;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 36px;
+    margin-bottom: 34px;
   }
 
   .login-divider {
-    width: 40px; height: 2px;
-    background: linear-gradient(90deg, transparent, #d4c3a3, transparent);
+    width: 40px; height: 1px;
+    background: var(--line);
     margin: 0 auto 32px;
   }
 
@@ -86,210 +118,228 @@ const globalCSS = `
 
   .login-field label {
     display: block;
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #8e7865;
-    margin-bottom: 6px;
+    color: var(--bg-light);
+    margin-bottom: 8px;
     font-weight: 600;
   }
 
   .login-field input {
     width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(212,195,163,0.2);
-    border-radius: 10px;
+    background-color: rgba(245,240,230,0.03);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
     padding: 13px 16px;
-    color: #f5f0e6;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-size: 0.92rem;
     outline: none;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.3s, background 0.3s;
   }
 
   .login-field input:focus {
-    border-color: rgba(212,195,163,0.55);
-    background: rgba(255,255,255,0.07);
+    border-color: var(--accent);
+    background: rgba(245,240,230,0.06);
   }
 
   .login-btn {
     width: 100%;
-    margin-top: 8px;
-    padding: 14px;
-    background: linear-gradient(135deg, #d4c3a3, #c4ae8a);
-    color: #1a1411;
+    margin-top: 10px;
+    padding: 16px;
+    background-color: var(--accent);
+    color: var(--text-dark);
     border: none;
-    border-radius: 10px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.1s;
-    box-shadow: 0 4px 20px rgba(212,195,163,0.25);
+    transition: all 0.3s ease;
   }
 
-  .login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .login-btn:hover { background-color: var(--text-light); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.25); }
   .login-btn:active { transform: translateY(0); }
-  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
   .login-error {
-    background: rgba(220,80,80,0.12);
-    border: 1px solid rgba(220,80,80,0.3);
-    border-radius: 8px;
-    color: #e07070;
-    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,90,70,0.1);
+    border: 1px solid rgba(200,90,70,0.3);
+    border-radius: var(--radius);
+    color: #d99080;
+    font-size: 0.82rem;
     padding: 10px 14px;
-    margin-top: 4px;
+    margin-top: 6px;
     text-align: left;
   }
 
   /* ── Dashboard ── */
-  .dash { min-height: 100vh; display: flex; flex-direction: column; background: #3a2e27; }
+  .dash { min-height: 100vh; display: flex; flex-direction: column; background-color: var(--bg-medium); }
 
   .dash-header {
-    background: linear-gradient(90deg, #1e1610, #2a211c);
-    border-bottom: 1px solid rgba(212,195,163,0.12);
-    padding: 0 36px;
-    height: 62px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 18px 40px;
+    background-color: rgba(42, 33, 28, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   }
 
   .dash-header-left { display: flex; align-items: center; gap: 14px; }
 
   .dash-logo-dot {
-    width: 34px; height: 34px; border-radius: 10px;
-    background: linear-gradient(135deg, #d4c3a3, #a89070);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 13px; color: #1a1411; letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
   }
+  .dash-logo-dot span { color: var(--accent); }
 
-  .dash-header-title { color: #d4c3a3; font-weight: 700; font-size: 16px; letter-spacing: 0.5px; }
-  .dash-header-sep { color: rgba(212,195,163,0.3); font-size: 16px; }
-  .dash-header-sub { color: #8e7865; font-size: 13px; }
+  .dash-header-sep { color: var(--line); font-size: 16px; }
+  .dash-header-sub {
+    font-family: var(--font-mono);
+    color: var(--bg-light);
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
   .dash-header-right { display: flex; align-items: center; gap: 16px; }
 
   .dash-user-pill {
     display: flex; align-items: center; gap: 8px;
-    background: rgba(212,195,163,0.07);
-    border: 1px solid rgba(212,195,163,0.12);
-    border-radius: 30px;
-    padding: 6px 14px 6px 10px;
+    background: rgba(212,195,163,0.06);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 6px 14px 6px 6px;
   }
 
   .dash-user-avatar {
     width: 26px; height: 26px; border-radius: 50%;
-    background: linear-gradient(135deg, #d4c3a3, #a89070);
+    background: var(--accent);
     display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: #1a1411;
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600; color: var(--text-dark);
     flex-shrink: 0;
   }
 
-  .dash-user-email { color: #a89070; font-size: 12px; }
+  .dash-user-email { color: var(--bg-light); font-size: 0.78rem; }
 
   .dash-logout-btn {
+    font-family: var(--font-mono);
     background: transparent;
-    border: 1px solid rgba(212,195,163,0.25);
-    color: #d4c3a3;
-    border-radius: 8px;
-    padding: 8px 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 16px;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
   }
-  .dash-logout-btn:hover { background: rgba(212,195,163,0.08); border-color: rgba(212,195,163,0.4); }
+  .dash-logout-btn:hover { background: var(--accent); color: var(--bg-dark); }
 
   /* ── Main content ── */
-  .dash-main { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 40px 24px; }
+  .dash-main { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 50px 24px 80px; }
 
   /* ── Stats ── */
-  .stats-row { display: flex; gap: 16px; margin-bottom: 40px; }
+  .stats-row { display: flex; gap: 16px; margin-bottom: 50px; }
 
   .stat-card {
     flex: 1;
-    background: linear-gradient(145deg, #2a211c, #302620);
-    border: 1px solid rgba(212,195,163,0.12);
-    border-radius: 16px;
-    padding: 24px 28px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 28px;
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow);
   }
 
   .stat-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    background: rgba(212,195,163,0.1);
-    border: 1px solid rgba(212,195,163,0.15);
+    width: 46px; height: 46px; border-radius: var(--radius);
+    background: rgba(212,195,163,0.08);
+    border: 1px solid var(--line);
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px; flex-shrink: 0;
+    font-size: 1.1rem; color: var(--accent);
+    flex-shrink: 0;
   }
 
   .stat-info { display: flex; flex-direction: column; }
-  .stat-num { color: #d4c3a3; font-size: 30px; font-weight: 700; line-height: 1; }
-  .stat-label { color: #8e7865; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; }
+  .stat-num { font-family: var(--font-display); color: var(--accent); font-size: 1.9rem; font-weight: 600; line-height: 1; }
+  .stat-label { font-family: var(--font-mono); color: var(--bg-light); font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 6px; }
 
   /* ── Section header ── */
   .section-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid rgba(212,195,163,0.1);
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
   }
 
-  .section-title-wrap { display: flex; align-items: center; gap: 10px; }
-  .section-title-dot { width: 4px; height: 20px; border-radius: 2px; background: linear-gradient(180deg, #d4c3a3, #a89070); }
-  .section-title { color: #f5f0e6; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .section-title-wrap { display: flex; align-items: center; gap: 12px; }
+  .section-title-dot { width: 4px; height: 18px; border-radius: 2px; background: var(--accent); }
+  .section-title {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  }
 
   .refresh-btn {
-    display: flex; align-items: center; gap: 6px;
-    background: rgba(212,195,163,0.07);
-    border: 1px solid rgba(212,195,163,0.2);
-    color: #d4c3a3;
-    border-radius: 8px;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 20px;
     padding: 8px 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 600;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: 0.3s ease;
   }
-  .refresh-btn:hover { background: rgba(212,195,163,0.13); }
+  .refresh-btn:hover { background: var(--accent); color: var(--bg-dark); }
 
   /* ── Empty state ── */
   .empty-state {
     text-align: center;
-    padding: 80px 20px;
-    color: #8e7865;
+    padding: 90px 20px;
+    color: var(--bg-light);
+    background-color: var(--bg-dark);
+    border: 1px solid var(--line);
+    border-radius: 10px;
   }
-  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
-  .empty-title { font-size: 16px; font-weight: 600; color: #a89070; margin-bottom: 6px; }
-  .empty-sub { font-size: 13px; color: #8e7865; }
+  .empty-icon { font-size: 2.4rem; margin-bottom: 18px; color: var(--accent); opacity: 0.6; }
+  .empty-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-light); margin-bottom: 8px; }
+  .empty-sub { font-size: 0.85rem; color: var(--bg-light); }
 
   /* ── Message cards ── */
   .msg-list { display: flex; flex-direction: column; gap: 10px; }
 
   .msg-card {
-    background: linear-gradient(145deg, #2a211c, #2e2419);
-    border: 1px solid rgba(212,195,163,0.1);
-    border-radius: 14px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--line);
+    border-radius: 10px;
     overflow: hidden;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
-  .msg-card:hover { border-color: rgba(212,195,163,0.25); box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-  .msg-card.expanded { border-color: rgba(212,195,163,0.3); }
+  .msg-card:hover { border-color: rgba(212,195,163,0.3); box-shadow: var(--shadow); }
+  .msg-card.expanded { border-color: rgba(212,195,163,0.35); }
 
   .msg-card-header {
     display: flex;
@@ -303,41 +353,43 @@ const globalCSS = `
   .msg-card-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
 
   .msg-avatar {
-    width: 40px; height: 40px; border-radius: 12px;
-    background: rgba(212,195,163,0.1);
-    border: 1px solid rgba(212,195,163,0.15);
+    width: 38px; height: 38px; border-radius: var(--radius);
+    background: rgba(212,195,163,0.08);
+    border: 1px solid var(--line);
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; font-weight: 700; color: #d4c3a3;
+    font-family: var(--font-mono);
+    font-size: 13px; font-weight: 600; color: var(--accent);
     flex-shrink: 0;
   }
 
-  .msg-name { color: #f5f0e6; font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .msg-email { color: #8e7865; font-size: 12px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .msg-name { font-family: var(--font-display); color: var(--text-light); font-weight: 600; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .msg-email { color: var(--bg-light); font-size: 0.78rem; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .msg-card-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
-  .msg-date { color: #8e7865; font-size: 12px; white-space: nowrap; }
-  .msg-chevron { color: #d4c3a3; font-size: 10px; transition: transform 0.2s; }
+  .msg-card-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .msg-date { font-family: var(--font-mono); color: var(--bg-light); font-size: 0.72rem; white-space: nowrap; }
+  .msg-chevron { color: var(--accent); font-size: 0.7rem; transition: transform 0.3s; }
   .msg-chevron.open { transform: rotate(180deg); }
 
   .msg-card-body {
-    border-top: 1px solid rgba(212,195,163,0.08);
-    padding: 20px 22px;
-    background: rgba(0,0,0,0.1);
+    border-top: 1px solid var(--line);
+    padding: 22px;
+    background: rgba(0,0,0,0.12);
   }
 
   .msg-label {
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    color: #8e7865; font-weight: 600; margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--bg-light); font-weight: 600; margin-bottom: 12px;
   }
 
   .msg-text {
-    color: #f5f0e6;
-    font-size: 14px;
+    color: var(--text-light);
+    font-size: 0.92rem;
     line-height: 1.75;
     white-space: pre-wrap;
     background: rgba(212,195,163,0.04);
-    border: 1px solid rgba(212,195,163,0.08);
-    border-radius: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
     padding: 16px;
     margin-bottom: 20px;
   }
@@ -345,38 +397,47 @@ const globalCSS = `
   .msg-actions { display: flex; gap: 10px; }
 
   .reply-btn {
-    display: flex; align-items: center; gap: 7px;
-    background: linear-gradient(135deg, #d4c3a3, #c4ae8a);
-    color: #1a1411;
+    display: inline-flex; align-items: center; gap: 8px;
+    background-color: var(--accent);
+    color: var(--text-dark);
     border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
+    border-radius: var(--radius);
+    padding: 12px 20px;
     text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 700;
+    font-size: 0.78rem; font-weight: 700;
     letter-spacing: 0.5px;
-    transition: opacity 0.2s, transform 0.1s;
-    box-shadow: 0 2px 12px rgba(212,195,163,0.2);
+    transition: all 0.3s ease;
   }
-  .reply-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .reply-btn:hover { background-color: var(--text-light); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.25); }
 
   .delete-btn {
-    display: flex; align-items: center; gap: 7px;
-    background: rgba(220,80,80,0.08);
-    border: 1px solid rgba(220,80,80,0.25);
-    color: #e07070;
-    border-radius: 8px;
-    padding: 10px 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(200,90,70,0.4);
+    color: #d99080;
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    font-family: var(--font-body);
+    font-size: 0.78rem; font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition: all 0.3s ease;
   }
-  .delete-btn:hover { background: rgba(220,80,80,0.15); border-color: rgba(220,80,80,0.4); }
+  .delete-btn:hover { background: rgba(200,90,70,0.12); border-color: rgba(200,90,70,0.6); }
   .delete-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* ── Loading ── */
-  .loading-state { text-align: center; padding: 60px; color: #8e7865; font-size: 14px; letter-spacing: 1px; }
+  .loading-state {
+    text-align: center; padding: 70px;
+    font-family: var(--font-mono);
+    color: var(--bg-light); font-size: 0.82rem; letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .dash-header { padding: 15px 20px; }
+    .dash-header-sub { display: none; }
+    .dash-user-email { display: none; }
+    .stats-row { flex-direction: column; }
+  }
 `;
 
 function injectStyles() {
@@ -431,7 +492,7 @@ function LoginPage({ onLogin, error }) {
                             required
                         />
                     </div>
-                    {error && <div className="login-error">⚠ {error}</div>}
+                    {error && <div className="login-error"><i className="fa-solid fa-triangle-exclamation"></i> {error}</div>}
                     <button type="submit" className="login-btn" disabled={loading} style={{marginTop: 20}}>
                         {loading ? "Belépés..." : "Belépés"}
                     </button>
@@ -467,7 +528,7 @@ function MessageCard({ msg, onDelete }) {
                 </div>
                 <div className="msg-card-right">
                     <span className="msg-date">{dateStr}</span>
-                    <span className={`msg-chevron ${expanded ? "open" : ""}`}>▼</span>
+                    <i className={`fa-solid fa-chevron-down msg-chevron ${expanded ? "open" : ""}`}></i>
                 </div>
             </div>
             {expanded && (
@@ -476,10 +537,10 @@ function MessageCard({ msg, onDelete }) {
                     <div className="msg-text">{msg.message}</div>
                     <div className="msg-actions">
                         <a href={`mailto:${msg.email}?subject=Re: Megkeresés`} className="reply-btn">
-                            ✉ Válasz küldése
+                            <i className="fa-solid fa-reply"></i> Válasz küldése
                         </a>
                         <button className="delete-btn" onClick={handleDelete} disabled={deleting}>
-                            {deleting ? "Törlés..." : "🗑 Törlés"}
+                            <i className="fa-solid fa-trash"></i> {deleting ? "Törlés..." : "Törlés"}
                         </button>
                     </div>
                 </div>
@@ -516,8 +577,7 @@ function Dashboard({ user, onLogout }) {
         <div className="dash">
             <header className="dash-header">
                 <div className="dash-header-left">
-                    <div className="dash-logo-dot">KD</div>
-                    <span className="dash-header-title">K. Dávid</span>
+                    <div className="dash-logo-dot">&lt;K.Dávid<span>/</span>&gt;</div>
                     <span className="dash-header-sep">|</span>
                     <span className="dash-header-sub">Admin Panel</span>
                 </div>
@@ -533,7 +593,7 @@ function Dashboard({ user, onLogout }) {
             <main className="dash-main">
                 <div className="stats-row">
                     <div className="stat-card">
-                        <div className="stat-icon">✉️</div>
+                        <div className="stat-icon"><i className="fa-solid fa-envelope"></i></div>
                         <div className="stat-info">
                             <span className="stat-num">{loading ? "–" : messages.length}</span>
                             <span className="stat-label">Összes üzenet</span>
@@ -547,7 +607,7 @@ function Dashboard({ user, onLogout }) {
                         <span className="section-title">Beérkező üzenetek</span>
                     </div>
                     <button className="refresh-btn" onClick={fetchMessages}>
-                        ↻ Frissítés
+                        <i className="fa-solid fa-rotate"></i> Frissítés
                     </button>
                 </div>
 
@@ -555,7 +615,7 @@ function Dashboard({ user, onLogout }) {
                     <div className="loading-state">Betöltés...</div>
                 ) : messages.length === 0 ? (
                     <div className="empty-state">
-                        <div className="empty-icon">📭</div>
+                        <div className="empty-icon"><i className="fa-solid fa-inbox"></i></div>
                         <div className="empty-title">Nincs üzenet</div>
                         <div className="empty-sub">Ha valaki küld egy ajánlatkérést, itt fog megjelenni.</div>
                     </div>
@@ -598,7 +658,7 @@ function App() {
 
     if (authLoading) return (
         <div className="login-bg">
-            <div style={{color:"#8e7865", letterSpacing:2, fontSize:13}}>BETÖLTÉS...</div>
+            <div style={{fontFamily:"'JetBrains Mono', monospace", color:"#8e7865", letterSpacing:2, fontSize:13}}>BETÖLTÉS...</div>
         </div>
     );
     if (!user) return <LoginPage onLogin={handleLogin} error={loginError} />;
