@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K. Dávid - Webfejlesztés & Design</title>
+    <link rel="icon" href="/img/favi_light.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">&lt;K.Dávid<span class="logo-slash">/</span>&gt;</div>
+    <div class="nav-right">
+        <ul class="nav-links">
+            <li><a href="#home" class="lang-text" data-en="HOME" data-hu="FŐOLDAL">HOME</a></li>
+            <li><a href="#why-me" class="lang-text" data-en="WHY ME" data-hu="MIÉRT ÉN">WHY ME</a></li>
+            <li><a href="#services" class="lang-text" data-en="SERVICES" data-hu="SZOLGÁLTATÁSOK">SERVICES</a></li>
+            <li><a href="#process" class="lang-text" data-en="PROCESS" data-hu="FOLYAMAT">PROCESS</a></li>
+            <li><a href="#projects" class="lang-text" data-en="WORK" data-hu="MUNKÁIM">WORK</a></li>
+            <li><a href="#contact" class="lang-text" data-en="CONTACT" data-hu="KAPCSOLAT">CONTACT</a></li>
+        </ul>
+        <button id="lang-btn">EN</button>
+        <button id="menu-toggle" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<header id="home" class="hero">
+    <div class="hero-copy fade-up">
+        <p class="eyebrow lang-text" data-en="FREELANCE WEB DEVELOPER — BASED IN HUNGARY" data-hu="FREELANCE WEBFEJLESZTŐ — MAGYARORSZÁGRÓL">FREELANCE WEB DEVELOPER — BASED IN HUNGARY</p>
+        <h1 class="lang-text" data-en="Your website should work as hard as you do." data-hu="A weboldalad dolgozzon annyit, mint te.">Your website should work as hard as you do.</h1>
+        <p class="hero-sub lang-text" data-en="I design and build fast, custom-coded websites that turn visitors into paying customers — no templates, no bloat, just clean code built around your business." data-hu="Gyors, egyedi kódolású weboldalakat tervezek és építek, amelyek a látogatókból fizető ügyfeleket csinálnak — sablonok és felesleges elemek nélkül, tisztán a vállalkozásod köré építve.">I design and build fast, custom-coded websites that turn visitors into paying customers — no templates, no bloat, just clean code built around your business.</p>
+        <a href="#contact" class="btn lang-text" data-en="REQUEST A FREE QUOTE" data-hu="INGYENES AJÁNLATKÉRÉS">REQUEST A FREE QUOTE</a>
+    </div>
+
+    <div class="hero-panel fade-up" aria-hidden="true">
+        <div class="panel-frame">
+            <div class="panel-dots"><span></span><span></span><span></span></div>
+            <div class="panel-body">
+                <p class="line l1"><span class="tag">&lt;website&gt;</span></p>
+                <p class="line l2">&nbsp;&nbsp;status: <span class="val">"live"</span></p>
+                <p class="line l3">&nbsp;&nbsp;speed: <span class="val">"instant"</span></p>
+                <p class="line l4">&nbsp;&nbsp;design: <span class="val">"custom"</span></p>
+                <p class="line l5">&nbsp;&nbsp;converts: <span class="val val-bool">true</span></p>
+                <p class="line l6"><span class="tag">&lt;/website&gt;</span><span class="cursor">&nbsp;</span></p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="why-me" class="about-section">
+    <div class="section-head reveal">
+        <p class="eyebrow lang-text" data-en="WHY WORK WITH ME" data-hu="MIÉRT ÉN">WHY WORK WITH ME</p>
+        <h2 class="lang-text" data-en="I don't just write code. I build a tool for your business." data-hu="Nem csak kódolok. A vállalkozásod eszközét építem.">I don't just write code. I build a tool for your business.</h2>
+    </div>
+
+    <div class="about-grid reveal">
+        <p class="about-text lang-text" data-en="Whether you need a sharp landing page, a full webshop, or a complete rebrand, I deliver sites that are mobile-first, built for Google, and designed to convert — from the first sketch to the final line of code." data-hu="Legyen szó egy ütős bemutatkozó oldalról, egy teljes webáruházról vagy egy komplett arculatváltásról, olyan weboldalt szállítok, ami mobilbarát, a Google számára is optimalizált, és a konverzióra lett tervezve — az első vázlattól az utolsó sornyi kódig.">Whether you need a sharp landing page, a full webshop, or a complete rebrand, I deliver sites that are mobile-first, built for Google, and designed to convert — from the first sketch to the final line of code.</p>
+
+        <div class="stat-row">
+            <div class="stat">
+                <span class="stat-num">&lt;24h</span>
+                <span class="stat-label lang-text" data-en="average reply time" data-hu="átlagos válaszidő">average reply time</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">100%</span>
+                <span class="stat-label lang-text" data-en="mobile-optimized" data-hu="mobilra optimalizálva">mobile-optimized</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num">0</span>
+                <span class="stat-label lang-text" data-en="recycled templates" data-hu="újrahasznosított sablon">recycled templates</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="services-section">
+    <div class="section-head reveal">
+        <p class="eyebrow lang-text" data-en="WHAT I DO" data-hu="MIBEN TUDOK SEGÍTENI">WHAT I DO</p>
+        <h2 class="lang-text" data-en="Built around your business" data-hu="A vállalkozásod köré építve">Built around your business</h2>
+    </div>
+
+    <div class="services-list reveal">
+        <div class="service-row">
+            <i class="fa-solid fa-laptop-code"></i>
+            <div class="service-copy">
+                <h3 class="lang-text" data-en="Custom Development" data-hu="Egyedi Fejlesztés">Custom Development</h3>
+                <p class="lang-text" data-en="Hand-built from scratch and shaped entirely around your brand, your content, and your goals — no page builder in sight." data-hu="A semmiből, teljesen a márkádra, a tartalmadra és a céljaidra szabva építve — sablonszerkesztő nélkül.">Hand-built from scratch and shaped entirely around your brand, your content, and your goals — no page builder in sight.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right row-arrow"></i>
+        </div>
+        <div class="service-row">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <div class="service-copy">
+                <h3 class="lang-text" data-en="Easy Content Control" data-hu="Egyszerű Tartalomkezelés">Easy Content Control</h3>
+                <p class="lang-text" data-en="A simple content system so you can update text, images, and offers yourself — no developer, no waiting." data-hu="Egyszerű tartalomkezelő rendszer, amivel magad frissítheted a szöveget, a képeket és az ajánlataidat — fejlesztő és várakozás nélkül.">A simple content system so you can update text, images, and offers yourself — no developer, no waiting.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right row-arrow"></i>
+        </div>
+        <div class="service-row">
+            <i class="fa-solid fa-mobile"></i>
+            <div class="service-copy">
+                <h3 class="lang-text" data-en="Responsive by Default" data-hu="Alapból Reszponzív">Responsive by Default</h3>
+                <p class="lang-text" data-en="Every site is tested and tuned on phones, tablets, and desktops, because that's where your customers actually are." data-hu="Minden oldalt telefonon, tableten és asztali gépen is tesztelek és finomhangolok, mert ott vannak az ügyfeleid.">Every site is tested and tuned on phones, tablets, and desktops, because that's where your customers actually are.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right row-arrow"></i>
+        </div>
+        <div class="service-row">
+            <i class="fa-solid fa-rocket"></i>
+            <div class="service-copy">
+                <h3 class="lang-text" data-en="Built for Speed" data-hu="Sebességre Építve">Built for Speed</h3>
+                <p class="lang-text" data-en="Lean code and optimized assets mean your site loads instantly — before visitors think about leaving." data-hu="Karcsú kód és optimalizált fájlok — az oldalad azonnal betölt, mielőtt a látogató meggondolná magát.">Lean code and optimized assets mean your site loads instantly — before visitors think about leaving.</p>
+            </div>
+            <i class="fa-solid fa-arrow-right row-arrow"></i>
+        </div>
+    </div>
+</section>
+
+<section id="process" class="process-section">
+    <div class="section-head reveal">
+        <p class="eyebrow lang-text" data-en="HOW IT WORKS" data-hu="HOGYAN DOLGOZUNK">HOW IT WORKS</p>
+        <h2 class="lang-text" data-en="From idea to live site" data-hu="Az ötlettől az éles oldalig">From idea to live site</h2>
+    </div>
+
+    <div class="process-track reveal">
+        <div class="process-step">
+            <span class="step-num">01</span>
+            <h3 class="lang-text" data-en="Discovery" data-hu="Egyeztetés">Discovery</h3>
+            <p class="lang-text" data-en="We talk through your goals, your audience, and what success looks like for your business." data-hu="Átbeszéljük a céljaidat, a célközönségedet, és hogy nálad hogyan néz ki a siker.">We talk through your goals, your audience, and what success looks like for your business.</p>
+        </div>
+        <div class="process-step">
+            <span class="step-num">02</span>
+            <h3 class="lang-text" data-en="Design" data-hu="Tervezés">Design</h3>
+            <p class="lang-text" data-en="I design a layout built around your content and brand — not a generic theme." data-hu="A tartalmadra és márkádra szabott elrendezést tervezek — nem egy általános sablont.">I design a layout built around your content and brand — not a generic theme.</p>
+        </div>
+        <div class="process-step">
+            <span class="step-num">03</span>
+            <h3 class="lang-text" data-en="Build" data-hu="Fejlesztés">Build</h3>
+            <p class="lang-text" data-en="I hand-code the site for speed, responsiveness, and search visibility." data-hu="Kézzel kódolom az oldalt a sebesség, a reszponzivitás és a kereshetőség jegyében.">I hand-code the site for speed, responsiveness, and search visibility.</p>
+        </div>
+        <div class="process-step">
+            <span class="step-num">04</span>
+            <h3 class="lang-text" data-en="Launch" data-hu="Indulás">Launch</h3>
+            <p class="lang-text" data-en="Your site goes live, and I stay reachable for support and updates after." data-hu="Az oldalad élesedik, és utána is elérhető maradok támogatásért és frissítésekért.">Your site goes live, and I stay reachable for support and updates after.</p>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="projects-section">
+    <div class="section-head reveal">
+        <p class="eyebrow lang-text" data-en="SELECTED WORK" data-hu="VÁLOGATOTT MUNKÁIM">SELECTED WORK</p>
+        <h2 class="lang-text" data-en="RECENT SUCCESS STORIES" data-hu="LEGÚJABB MUNKÁIM">RECENT SUCCESS STORIES</h2>
+    </div>
+
+    <div class="spotlight reveal">
+<!--
+        <div class="spotlight-card">
+            <div class="spotlight-icon"><i class="fa-solid fa-building"></i></div>
+            <div class="spotlight-info">
+                <h3 class="lang-text" data-en="Corporate Landing Page" data-hu="Céges Bemutatkozó Oldal">Corporate Landing Page</h3>
+                <p class="lang-text" data-en="A highly optimized lead-generation website designed to capture customer inquiries effectively." data-hu="Egy konverzióra optimalizált weboldal, amelynek fő célja az ajánlatkérések maximalizálása.">A highly optimized lead-generation website designed to capture customer inquiries effectively.</p>
+                <div class="links"><a href="#">LIVE DEMO</a></div>
+            </div>
+        </div>
+-->
+        <div class="spotlight-card">
+            <div class="spotlight-icon"><i class="fa-solid fa-palette"></i></div>
+            <div class="spotlight-info">
+                <h3 class="lang-text" data-en="Katsumi's Art Portfolio" data-hu="Katsumi Művészeti Portfóliója">Katsumi's Art Portfolio</h3>
+                <p class="lang-text" data-en="A beautifully responsive, CMS-equipped artist website built for my good friend Katsumi, allowing her stunning artworks to take center stage." data-hu="Egy kedves barátom, Katsumi számára készített reszponzív, CMS-sel felszerelt művészeti portfólió, ahol a lenyűgöző alkotásaié a főszerep.">A beautifully responsive, CMS-equipped artist website built for my good friend Katsumi, allowing her stunning artworks to take center stage.</p>
+                <div class="tag-row">
+                    <span class="tag-pill">Responsive</span>
+                    <span class="tag-pill">CMS</span>
+                </div>
+                <div class="links">
+                    <a href="https://www.katsumi.hu/" target="_blank" rel="noopener noreferrer">LIVE DEMO</a>
+                </div>
+            </div>
+        </div>
+<!--
+        <div class="spotlight-card">
+            <div class="spotlight-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="spotlight-info">
+                <h3 class="lang-text" data-en="Restaurant Booking System" data-hu="Éttermi Foglalási Rendszer">Restaurant Booking System</h3>
+                <p class="lang-text" data-en="An elegant digital menu and automated table reservation system for a local restaurant." data-hu="Elegáns digitális étlap és automatizált asztalfoglalási rendszer egy helyi étteremnek.">An elegant digital menu and automated table reservation system for a local restaurant.</p>
+                <div class="links"><a href="#">LIVE DEMO</a></div>
+            </div>
+        </div>
+-->
+    </div>
+</section>
+
+<section id="contact" class="contact-section">
+    <div class="contact-grid reveal">
+        <div class="contact-intro">
+            <p class="eyebrow lang-text" data-en="GET IN TOUCH" data-hu="VEGYÜK FEL A KAPCSOLATOT">GET IN TOUCH</p>
+            <h2 class="lang-text" data-en="Let's build something" data-hu="Építsünk valamit">Let's build something</h2>
+            <p class="lang-text" data-en="Tell me about your idea, and I'll turn it into a website that works as hard as you do. I typically reply within 24 hours." data-hu="Meséld el az ötleted, és olyan weboldalt építek belőle, ami annyit dolgozik, mint te. Általában 24 órán belül válaszolok.">Tell me about your idea, and I'll turn it into a website that works as hard as you do. I typically reply within 24 hours.</p>
+            <ul class="contact-facts">
+                <li><i class="fa-solid fa-bolt"></i><span class="lang-text" data-en="Free initial quote" data-hu="Ingyenes ajánlatkérés">Free initial quote</span></li>
+                <li><i class="fa-solid fa-clock"></i><span class="lang-text" data-en="Reply within 24 hours" data-hu="Válasz 24 órán belül">Reply within 24 hours</span></li>
+                <li><i class="fa-solid fa-location-dot"></i><span class="lang-text" data-en="Working with clients remotely" data-hu="Ügyfelekkel távolról dolgozom">Working with clients remotely</span></li>
+            </ul>
+        </div>
+
+        <form>
+            <input type="text" class="lang-placeholder" data-en="Your Name" data-hu="Neved" placeholder="Your Name" required>
+            <input type="email" class="lang-placeholder" data-en="Your Email" data-hu="E-mail címed" placeholder="Your Email" required>
+            <textarea class="lang-placeholder" data-en="How can I help you?" data-hu="Miben tudok segíteni?" placeholder="How can I help you?" rows="5" required></textarea>
+            <button type="submit" class="btn lang-text" data-en="SEND MESSAGE" data-hu="ÜZENET ELKÜLDÉSE">SEND MESSAGE</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <p class="lang-text" data-en="© 2026 K. Dávid | Helping businesses grow online." data-hu="© 2026 K. Dávid | Segítek a vállalkozásod digitális növekedésében.">© 2026 K. Dávid | Helping businesses grow online.</p>
+</footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
